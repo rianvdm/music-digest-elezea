@@ -97,7 +97,7 @@ Promise.all(lastFMUsernames.map(fetchDataForUser))
       lastfmTopArtists.appendChild(dataContainer);
 
       const userTitle = document.createElement('h2');
-      userTitle.innerText = `Here is ${lastFMUsernames[index]}'s top artists`;
+      userTitle.innerText = `Here are ${lastFMUsernames[index]}'s top artists`;
       dataContainer.appendChild(userTitle);
 
       const html = await displayTopArtists(userData, lastFMUsernames[index]);
