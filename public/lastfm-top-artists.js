@@ -1,4 +1,4 @@
-const lastFMUsernames = ['vhata', 'SundancerZA', 'ThisIsGio', 'draklef', 'jhuggart113', 'imsickofmaps', 'Troegie', 'bordesak'];
+const lastFMUsernames = ['vhata', 'SundancerZA', 'ThisIsGio', 'draklef', 'mobivangelist', 'jhuggart113', 'imsickofmaps', 'Troegie', 'bordesak'];
 
 const fetchDataForUser = (username) => {
   return fetch(`/.netlify/functions/getTopArtists?lastFMUser=${username}&period=7day`)
@@ -6,7 +6,7 @@ const fetchDataForUser = (username) => {
 };
 
 const displayTopArtists = async (userData, username) => {
-  const topArtists = userData.topartists.artist.slice(0, 5);
+  const topArtists = userData.topartists.artist.slice(0, 3);
 
   // Create an array of promises for each artist's data
   const artistPromises = topArtists.map(artist => {
