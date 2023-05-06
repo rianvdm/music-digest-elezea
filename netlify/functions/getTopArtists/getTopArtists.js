@@ -1,12 +1,12 @@
 // Get top artists from last.fm
 
 const lastFMToken = process.env.LAST_FM_API_TOKEN;
-const lastFMUser = 'bordesak';
 
 const fetch = require('node-fetch');
 
-const handler = async (event) => {
+exports.handler = async function (event, context) {
   const period = event.queryStringParameters.period;
+  const lastFMUser = event.queryStringParameters.lastFMUser;
   const url = `http://ws.audioscrobbler.com/2.0/?method=user.gettopartists&user=${lastFMUser}&api_key=${lastFMToken}&period=${period}&format=json`
   const results = await fetch(url);
 
@@ -33,4 +33,3 @@ const handler = async (event) => {
   }
 }
 
-module.exports = { handler }
