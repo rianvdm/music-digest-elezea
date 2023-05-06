@@ -3,3 +3,11 @@
 
 [[plugins]]
   package = "@netlify/plugin-emails"
+
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "https://sage-blancmange-420de0.netlify.app"
+    Access-Control-Allow-Methods = "GET, POST, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type"
