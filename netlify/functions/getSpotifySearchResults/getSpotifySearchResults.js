@@ -9,36 +9,36 @@ exports.handler = async function(event, context) {
 
     const getTokenUrl = process.env.GET_SPOTIFY_TOKEN_URL;
 
-    console.log('Creating Redis client');
-      const client = new Redis(process.env.REDIS_URL, {
+    console.log('Creating Redis client2');
+      const client2 = new Redis(process.env.REDIS_URL, {
       connectTimeout: 26000,
     });
 
     console.log('Retrieving access token and expiration time from Redis');
-    let access_token = await client.get("spotify_access_token");
-    let expires_at_str = await client.get("spotify_expires_at");
-    let expires_at = parseInt(expires_at_str, 10);
-    console.log(expires_at);
+    let access_token_2 = await client2.get("spotify_access_token_2");
+    let expires_at_2_str = await client2.get("spotify_expires_at_2");
+    let expires_at_2 = parseInt(expires_at_2_str, 10);
+    console.log(expires_at_2);
 
-    if (!access_token || !expires_at || Date.now() >= expires_at) {
+    if (!access_token_2 || !expires_at_2 || Date.now() >= expires_at_2) {
       console.log('Fetching new access token');
       const tokenResponse = await fetch(getTokenUrl);
       const tokenData = await tokenResponse.json();
       console.log(tokenData);
-      access_token = tokenData.access_token;
-      expires_at = Date.now() + tokenData.expires_in * 1000;
-      console.log(expires_at);
+      access_token_2 = tokenData.access_token;
+      expires_at_2 = Date.now() + tokenData.expires_in * 1000;
+      console.log(expires_at_2);
 
       console.log('Storing new access token and expiration time in Redis');
-      await client.set("spotify_access_token", access_token);
-      await client.set("spotify_expires_at", expires_at);
+      await client2.set("spotify_access_token_2", access_token_2);
+      await client2.set("spotify_expires_at_2", expires_at_2);
     } else {
       console.log('Using existing access token from Redis');
-      console.log(expires_at);
+      console.log(expires_at_2);
     }
 
-    console.log('Quitting Redis client');
-    await client.quit();
+    console.log('Quitting Redis client2');
+    await client2.quit();
 
     const urlTemplates = {
       getTrack: (query) => `https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=track&limit=20`,
@@ -59,7 +59,7 @@ exports.handler = async function(event, context) {
     // Send a GET request to the Spotify API to search for the song
     const response = await fetch(url, {
       headers: {
-        Authorization: `Bearer ${access_token}`
+        Authorization: `Bearer ${access_token_2}`
       }
     });
 

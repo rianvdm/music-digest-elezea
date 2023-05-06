@@ -3,11 +3,11 @@
 // Docs on event and context https://docs.netlify.com/functions/build/#code-your-function-2
 
 const lastFMToken = process.env.LAST_FM_API_TOKEN;
-const lastFMUser = 'bordesak';
 
 const fetch = require('node-fetch');
 
-const handler = async () => {
+exports.handler = async function (event, context) {
+  const lastFMUser = event.queryStringParameters.lastFMUser;
   const url = `http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${lastFMUser}&api_key=${lastFMToken}&format=json`
   const results = await fetch(url);
 
@@ -34,4 +34,4 @@ const handler = async () => {
   }
 }
 
-module.exports = { handler }
+

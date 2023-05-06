@@ -35,63 +35,17 @@
 
   <body>
 
-    <nav>
-      <ul>
-        <li class="active"><a href="/">Home</a></li>
-        <li><a href="/recommendations">Recommendations</a></li>
-        <li><a href="/mood">Mood</a></li>
-        <li><a href="/about">About</a></li>
-      </ul>
-    </nav>
+    <h1>Elezea’s music</h1>
 
-    <h1>Rian’s music</h1>
-    
-   <p style="text-align: center;"><strong>Data about my listening history, and hand-picked music recommendations for your discovery and enjoyment. Read more about how the site works <a href="/about">here</a></strong>.</p>
-
-
-    <h2>▶️ Now playing</h2>
+    <h2>▶️ Listening history</h2>
     <div class="js-now-playing recent-tracks">
       <p style="text-align: center;">Loading...</p>
     </div>
-    <div class="js-openai-summary">
-      <p style="text-align: center;">Generating summary...</p>
-    </div>
-    <div class="js-spotify-song">
-        <p style="text-align: center;">Loading...</p>
-    </div>
-    <h2>❤️ Recommended songs</h2>
-    <p style="text-align: center;"><strong>Here are some songs I recently liked and wanted to share. Click to listen on your favorite streaming service.</strong></p>
-    <div class="js-lastfm-loved-tracks recent-tracks">
-      <p style="text-align: center;">Generating summaries and getting related tracks...
-        <br><br><em>If you see this message for more than 10 seconds, there was likely an API timeout somewhere. Please reload the page to try again.</em></p>
-    </div>
-    <p style="text-align: center;"><a href="/recommendations">View more recommendations...</a>
-    <h2>🏆 Top albums</h2>
-    <p style="text-align: center;"><strong>The top 6 albums I listened to in the past 7 days. Click to listen on your favorite streaming service.</strong></p>
-    <div class="js-lastfm-top-albums track-grid">
-      <p style="text-align: center;">Loading...</p>
-    </div>
-    <h4 style="text-align: center;">🤔 Curious how all of this works? Read more about the site <a href="/about">here</a>. 🤔</h4>
-    <h2>👩‍🎤 Top artists</h2>
-    <p style="text-align: center;"><strong>The top 6 artists I listened to in the past 7 days.</strong></p>
-    <div class="js-lastfm-top-artists recent-tracks">
-      <p style="text-align: center;">Loading...</p>
-    </div>
-    <h2>💿 Recent purchases</h2>
-    <p style="text-align: center;"><strong>The last 6 albums I added to my physical collection.</strong></p>
-    <div class="js-discogs-added track-grid">
-      <p style="text-align: center;">Loading...</p>
-    </div>
+
     <div class="footer">
       <p><a href="https://youtu.be/cNtprycno14?t=9032">There’s a fire that’s been burning right outside my door.</a></p>
     </div>
 
-  <script src="lastfm-now-playing.js"></script>
-  <script src="lastfm-now-playing-streaming.js"></script>
-  <script src="lastfm-loved-tracks.js?v=7"></script>
-  <script src="lastfm-top-albums.js"></script>
-  <script src="lastfm-top-artists.js?v=1"></script>  
-  <script src="discogs-added.js"></script>
-  <script src="openai-now-playing-summary.js"></script>
+  <script src="lastfm-recent-history.js"></script>
 </body>
 </html>
