@@ -3,30 +3,17 @@ const fetch = require("node-fetch");
 const refreshToken = process.env.SPOTIFY_REFRESH_TOKEN;
 const clientId = process.env.SPOTIFY_CLIENT_ID;
 const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
+const gettokenSecret = process.env.SPOTIFY_GET_TOKEN_SECRET;
 
 exports.handler = async function(event, context) {
-  const allowedOrigins = ['https://sage-blancmange-420de0.netlify.app'];
-  const origin = event.headers.origin || event.headers.Origin;
+  // Check for API key in the headers
+  const requestApiKey = event.headers["x-api-key"];
 
-  const corsHeaders = {
-    'Access-Control-Allow-Origin': allowedOrigins.includes(origin) ? origin : '',
-    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type'
-  };
-
-  if (event.httpMethod === 'OPTIONS') {
+  // If the API key is not present or does not match, return a 401 Unauthorized status code
+  if (!requestApiKey || requestApiKey !== gettokenSecret) {
     return {
-      statusCode: 200,
-      headers: corsHeaders,
-      body: ''
-    };
-  }
-
-  if (!allowedOrigins.includes(origin)) {
-    return {
-      statusCode: 403,
-      headers: corsHeaders,
-      body: 'Forbidden: Access is restricted to allowed origins.'
+      statusCode: 401,
+      body: JSON.stringify({ error: "Unauthorized" })
     };
   }
 
@@ -48,21 +35,18 @@ exports.handler = async function(event, context) {
 
     // Parse the response JSON and return the access token
     const { access_token, expires_in } = await response.json();
-
-    // For testing purposes, set expires_in to a very short duration (e.g., 1 second)
-    // const shortexpiration = 1;
-
+    
     return {
       statusCode: 200,
-      headers: corsHeaders,
       body: JSON.stringify({ access_token, expires_in })
     };
   } catch (error) {
     // If an error occurs, return a 500 status code and error message
     return {
       statusCode: 500,
-      headers: corsHeaders,
       body: JSON.stringify({ error: error.message })
     };
   }
+
 };
+

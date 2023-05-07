@@ -9,7 +9,12 @@ exports.handler = async function(event, context) {
     const getTokenUrl = process.env.GET_SPOTIFY_TOKEN_URL;
 
     // Call the getSpotifyToken function to retrieve an access token
-    const tokenResponse = await fetch(getTokenUrl);
+    const gettokenSecret = process.env.SPOTIFY_GET_TOKEN_SECRET;
+    const tokenResponse = await fetch(getTokenUrl, {
+        headers: {
+          "x-api-key": gettokenSecret
+        }
+      });
     const { access_token } = await tokenResponse.json();
 
   const urlTemplates = {

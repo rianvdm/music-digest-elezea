@@ -22,7 +22,12 @@ exports.handler = async function(event, context) {
 
     if (!access_token_2 || !expires_at_2 || Date.now() >= expires_at_2) {
       console.log('Fetching new access token');
-      const tokenResponse = await fetch(getTokenUrl);
+      const gettokenSecret = process.env.SPOTIFY_GET_TOKEN_SECRET;
+      const tokenResponse = await fetch(getTokenUrl, {
+        headers: {
+          "x-api-key": gettokenSecret
+        }
+      });
       const tokenData = await tokenResponse.json();
       console.log(tokenData);
       access_token_2 = tokenData.access_token;
