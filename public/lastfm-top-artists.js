@@ -1,4 +1,4 @@
-const lastFMUsernames = ['vhata', 'SundancerZA', 'ThisIsGio', 'draklef', 'mobivangelist', 'jhuggart113', 'imsickofmaps', 'Troegie', 'bordesak'];
+const lastFMUsernames = ['vhata', 'SundancerZA', 'ThisIsGio', 'draklef', 'mobivangelist', 'calisza', 'imsickofmaps', 'TMC1985','Troegie', 'jhuggart113', 'bordesak'];
 
 const fetchDataForUser = (username) => {
   return fetch(`/.netlify/functions/getTopArtists?lastFMUser=${username}&period=7day`)
